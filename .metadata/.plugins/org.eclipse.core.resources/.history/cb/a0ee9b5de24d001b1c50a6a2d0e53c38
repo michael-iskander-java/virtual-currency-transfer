@@ -1,0 +1,48 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.model;
+
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+
+@Entity
+public class Account {
+
+	@Id
+	@GeneratedValue
+	private long id;
+
+	private String userName;
+
+	private String email;
+
+	private String passowrd;
+
+	private String userId;
+
+	private double vc;
+
+	private Date createdDate;
+
+	protected Account() {
+
+	}
+
+
+	public Account(long id, String userName, String email, String passowrd, String userId, double vc, Date createdDate) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.email = email;
+		this.passowrd = passowrd;
+		this.userId = userId;
+		this.vc = vc;
+		this.createdDate = createdDate;
+	}
+
+
+
+}

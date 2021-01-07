@@ -1,0 +1,40 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.usercontroller;
+
+import org.springframework.web.bind.annotation.RestController;
+import java.net.URI;
+import java.util.List;
+
+import io.blockchaingroup.vc.virtualcurrencytransfer.common.AccountDO;
+import io.blockchaingroup.vc.virtualcurrencytransfer.dao.AccountDaoService;
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.Account;
+import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+@RestController
+public class AccountController {
+
+
+	@Autowired
+	private AccountDaoService accountRepository;
+
+	@PostMapping("/addaccount")
+	public ResponseEntity<Object> createAccount(@RequestBody AccountDO account) {
+		Account savedAccount = accountRepository.addAccount(account);
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedAccount.getId())
+				.toUri();
+
+		return ResponseEntity.created(location).build();
+
+	}
+
+	@GetMapping("/accounts")
+	public List<Account> retrieveAllUsers() {
+		return accountRepository.findAll();
+	}
+
+}

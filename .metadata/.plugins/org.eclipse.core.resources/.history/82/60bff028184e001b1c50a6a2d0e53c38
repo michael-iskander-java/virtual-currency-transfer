@@ -1,0 +1,27 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.usercontroller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import io.blockchaingroup.vc.virtualcurrencytransfer.dao.AccountDaoService;
+
+import org.springframework.web.bind.annotation.PostMapping;
+
+@RestController
+public class AccountController {
+
+
+	@Autowired
+	private AccountDaoService userRepository;
+
+	@PostMapping("/jpa/users")
+	public ResponseEntity<Object> createUser(@RequestBody User user) {
+		Account savedUser = userRepository.save(user);
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
+				.toUri();
+
+		return ResponseEntity.created(location).build();
+
+	}
+
+}

@@ -1,0 +1,86 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.dao;
+
+import org.springframework.stereotype.Service;
+
+import io.blockchaingroup.vc.virtualcurrencytransfer.common.AccountDO;
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.Account;
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.Transaction;
+import io.blockchaingroup.vc.virtualcurrencytransfer.repository.AccountRepository;
+import io.blockchaingroup.vc.virtualcurrencytransfer.repository.TransactionRepository;
+
+import java.util.Date;
+import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class DaoService {
+
+	@Autowired
+	AccountRepository<Account> accountRepository;
+
+	@Autowired
+	TransactionRepository<Transaction> transactionRepository;
+
+	@Transactional
+	public Account addAccount(AccountDO accountRequest) throws Exception {
+
+
+		List<Account> accounts = accountRepository.getAllAccounts();
+
+		for (Account account : accounts) {
+
+			if(accountRequest.getUserName().equalsIgnoreCase(account.getUserName()))
+				throw new Exception("Username is already used.");
+
+			if(accountRequest.getEmail().equalsIgnoreCase(account.getEmail()))
+				throw new Exception("Email is already used.");
+		}
+
+		long lastId = 0;
+
+
+		if (!accounts.isEmpty()) {
+
+			lastId = accounts.get(0).getId();
+
+		}
+
+
+
+		Account persistedAccount = new Account();
+
+		persistedAccount.setUserName(accountRequest.getUserName());
+		persistedAccount.setEmail(accountRequest.getEmail());
+		persistedAccount.setPassowrd(hashPassword(accountRequest.getPassowrd()));
+		persistedAccount.setUserId("usr-"+(lastId+1));
+
+		persistedAccount.setCreatedDate(new Date());
+
+
+
+		return accountRepository.save(persistedAccount);
+	}
+
+	@Transactional
+	public boolean updateAccount(Account account) {
+		return accountRepository.save(account) != null;
+	}
+
+	@Transactional
+	public List<Account> getAllAccounts() {
+		return (List<Account>) accountRepository.findAll();
+	}
+
+	@Transactional
+	public List<Account> doTransaction() {
+		return (List<Account>) accountRepository.findAll();
+	}
+
+	private String hashPassword(String plainTextPassword){
+		return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+	}
+
+}

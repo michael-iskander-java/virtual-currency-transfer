@@ -1,0 +1,60 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+
+public class RecipientAccount {
+
+	private String email;
+
+	private String userName;
+
+	private double transferredAmount;
+
+
+
+	public RecipientAccount() {
+		super();
+	}
+
+
+	public RecipientAccount(String email, String userId, double transferredAmount) {
+		super();
+		this.email = email;
+		this.userId = userId;
+		this.transferredAmount = transferredAmount;
+	}
+
+
+	public double getTransferredAmount() {
+		return transferredAmount;
+	}
+
+
+
+	public void setTransferredAmount(double transferredAmount) {
+		this.transferredAmount = transferredAmount;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+
+
+
+}

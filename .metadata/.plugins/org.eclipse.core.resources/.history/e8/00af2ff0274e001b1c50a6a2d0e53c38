@@ -1,0 +1,6 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer;
+
+
+public class ScheduledTasks {
+
+}

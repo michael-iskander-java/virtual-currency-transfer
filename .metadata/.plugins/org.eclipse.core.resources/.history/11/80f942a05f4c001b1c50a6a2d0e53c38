@@ -1,0 +1,11 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.usercontroller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+public class UserResource {
+
+
+
+}

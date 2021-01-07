@@ -1,0 +1,52 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.dao;
+
+import org.springframework.stereotype.Service;
+
+import io.blockchaingroup.vc.virtualcurrencytransfer.common.AccountDO;
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.Account;
+import io.blockchaingroup.vc.virtualcurrencytransfer.repository.AccountRepository;
+
+
+import java.util.Date;
+import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class AccountDaoService {
+
+	@Autowired
+	AccountRepository<Account> accountRepository;
+
+	@Transactional
+	public Account addAccount(AccountDO account) {
+
+
+		List<Account> accounts = accountRepository.getAllAccounts();
+		long lastID = 1;
+		if (!accounts.isEmpty())
+		accounts.get(0);
+
+		Account persistedAccount = new Account();
+
+		persistedAccount.setUserName(account.getUserName());
+		persistedAccount.setEmail(account.getEmail());
+		persistedAccount.setPassowrd(hashPassword(account.getPassowrd()));
+
+
+
+
+		persistedAccount.setCreatedDate(new Date());
+
+
+
+		return accountRepository.save(persistedAccount);
+	}
+
+	private String hashPassword(String plainTextPassword){
+		return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+	}
+
+}

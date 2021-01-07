@@ -1,0 +1,68 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class TransactionRecipient {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="transactionrecipient_id")
+	private long id;
+
+	private String userId;
+
+	@ManyToOne
+	@JoinColumn(name="transaction_id", nullable=false)
+	private Transaction transaction;
+
+	public TransactionRecipient(long id, String userId, Transaction transaction) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.transaction = transaction;
+	}
+
+	public TransactionRecipient() {
+		super();
+	}
+
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public String getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+
+	public Transaction getTransaction() {
+		return transaction;
+	}
+
+
+	public void setTransaction(Transaction transaction) {
+		this.transaction = transaction;
+	}
+
+
+
+}

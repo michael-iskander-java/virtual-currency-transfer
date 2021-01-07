@@ -1,0 +1,13 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+import java.util.Date;
+
+public class ReceivedTransactionItem {
+
+	private String userName;
+	private String userId;
+	private String email;
+	private double amount;
+	private Date transactionDate;
+
+}

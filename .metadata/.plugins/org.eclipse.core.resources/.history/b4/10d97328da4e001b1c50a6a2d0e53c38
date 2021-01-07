@@ -1,0 +1,28 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Transaction {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id;
+
+
+
+
+
+	private double totalAmount;
+
+	@Column(name="quantity")
+	private int quantity;
+
+	@ManyToOne
+	@JoinColumn(name="cart_id", nullable=false)
+	private Cart1 cart1;
+
+}

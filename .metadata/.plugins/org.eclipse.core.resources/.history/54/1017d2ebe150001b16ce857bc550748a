@@ -1,0 +1,220 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.dao;
+
+import org.springframework.stereotype.Service;
+
+import io.blockchaingroup.vc.virtualcurrencytransfer.common.AccountDO;
+import io.blockchaingroup.vc.virtualcurrencytransfer.common.ReceivedTransactionItem;
+import io.blockchaingroup.vc.virtualcurrencytransfer.common.RecipientAccount;
+import io.blockchaingroup.vc.virtualcurrencytransfer.common.SentTransaction;
+import io.blockchaingroup.vc.virtualcurrencytransfer.exception.AccountNotFoundException;
+import io.blockchaingroup.vc.virtualcurrencytransfer.exception.InsufficientFundException;
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.Account;
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.Transaction;
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.TransactionRecipient;
+import io.blockchaingroup.vc.virtualcurrencytransfer.repository.AccountRepository;
+import io.blockchaingroup.vc.virtualcurrencytransfer.repository.TransactionRecipientRepository;
+import io.blockchaingroup.vc.virtualcurrencytransfer.repository.TransactionRepository;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class DaoService {
+
+	@Autowired
+	AccountRepository<Account> accountRepository;
+
+	@Autowired
+	TransactionRepository<Transaction> transactionRepository;
+
+	@Autowired
+	TransactionRecipientRepository<TransactionRecipient> transactionRecipientRepository;
+
+	@Transactional
+	public Account addAccount(AccountDO accountRequest) throws Exception {
+
+
+		List<Account> accounts = accountRepository.getAllAccounts();
+
+		for (Account account : accounts) {
+
+			if(accountRequest.getUserName().equalsIgnoreCase(account.getUserName()))
+				throw new Exception("Username is already used.");
+
+			if(accountRequest.getEmail().equalsIgnoreCase(account.getEmail()))
+				throw new Exception("Email is already used.");
+		}
+
+		long lastId = 0;
+
+
+		if (!accounts.isEmpty()) {
+
+			lastId = accounts.get(0).getId();
+
+		}
+
+
+
+		Account persistedAccount = new Account();
+
+		persistedAccount.setUserName(accountRequest.getUserName());
+		persistedAccount.setEmail(accountRequest.getEmail());
+		persistedAccount.setPassowrd(hashPassword(accountRequest.getPassowrd()));
+		persistedAccount.setUserId("usr-"+(lastId+1));
+
+		persistedAccount.setCreatedDate(new Date());
+
+
+
+		return accountRepository.save(persistedAccount);
+	}
+
+	@Transactional
+	public boolean updateAccount(Account account) {
+		return accountRepository.save(account) != null;
+	}
+
+	@Transactional
+	public List<Account> getAllAccounts() {
+		return (List<Account>) accountRepository.findAll();
+	}
+
+	@Transactional
+	public List<Account> doTransaction(String userId, List<RecipientAccount> recipientAccounts) {
+
+		Account senderAccount = accountRepository.findByUserId(userId);
+
+		if (senderAccount == null)
+			throw new AccountNotFoundException("There is no Account with id: "+ userId);
+
+		List<TransactionRecipient> transactionRecipients = new ArrayList<>();
+		List<Account> accountsToBeUpdated = new ArrayList<>();
+
+		double totalVcAmount = 0;
+
+		Transaction transaction = new Transaction();
+		transaction.setSender(senderAccount);
+		transaction.setTransactionDate(new Date());
+
+
+		for (RecipientAccount recipientAccount : recipientAccounts) {
+			String recipientUserId = recipientAccount.getUserId();
+			Account recipient = accountRepository.findByUserId(recipientUserId);
+
+			if (recipient == null)
+				throw new AccountNotFoundException("There is no Account with id: "+ recipientUserId);
+
+
+			totalVcAmount += recipientAccount.getTransferredAmount();
+
+			if(totalVcAmount > senderAccount.getVc())
+				throw new InsufficientFundException("Insufficient fund for this transaction.");
+
+			TransactionRecipient transactionRecipient = new TransactionRecipient();
+			transactionRecipient.setUserId(recipient.getUserId());
+			transactionRecipient.setAmount(recipientAccount.getTransferredAmount());
+			transactionRecipient.setTransaction(transaction);
+			transactionRecipients.add(transactionRecipient);
+
+
+			recipient.setVc(recipient.getVc() + recipientAccount.getTransferredAmount());
+			accountsToBeUpdated.add(recipient);
+
+		}
+
+		senderAccount.setVc(senderAccount.getVc() - totalVcAmount);
+		accountsToBeUpdated.add(senderAccount);
+
+		accountRepository.saveAll(accountsToBeUpdated);
+
+		transaction.setTotalAmount(totalVcAmount);
+		transactionRepository.save(transaction);
+
+		transactionRecipientRepository.saveAll(transactionRecipients);
+
+
+		return null;
+	}
+
+
+	public List<SentTransaction> getSentTransactions(String userId) {
+
+		Account senderAccount = accountRepository.findByUserId(userId);
+
+		if (senderAccount == null)
+			throw new AccountNotFoundException("There is no Account with id: "+ userId);
+
+
+
+
+
+		List<Transaction> userTransactions =senderAccount.getTransactions();
+
+		List<SentTransaction> sentTransactions = new ArrayList<>();
+
+
+		for (Transaction transaction : userTransactions) {
+
+			SentTransaction sentTransaction = new SentTransaction();
+
+			sentTransaction.setAmount(transaction.getTotalAmount());
+			sentTransaction.setTransactionDate(transaction.getTransactionDate());
+
+			List<TransactionRecipient> transactionRecipients = transaction.getTransactionRecipients();
+			List<ReceivedTransactionItem> receivers = new ArrayList<>();
+
+			for (TransactionRecipient transactionRecipient : transactionRecipients) {
+
+				String recipientAccountId = transactionRecipient.getUserId();
+				Account recipientAccount = accountRepository.findByUserId(recipientAccountId);
+
+				ReceivedTransactionItem recipientAccountResponse = new ReceivedTransactionItem();
+				recipientAccountResponse.setUserName(recipientAccount.getUserName());
+				recipientAccountResponse.setUserId(recipientAccount.getUserId());
+				recipientAccountResponse.setEmail(recipientAccount.getEmail());
+				recipientAccountResponse.setAmount(transactionRecipient.getAmount());
+				receivers.add(recipientAccountResponse);
+
+			}
+
+			sentTransaction.setReceivers(receivers);
+			sentTransactions.add(sentTransaction);
+
+		}
+
+		return sentTransactions;
+
+	}
+	public List<TransactionResponse> getReceivedTransactions(String userId){
+
+		Account senderAccount = accountRepository.findByUserId(userId);
+
+		if (senderAccount == null)
+			throw new AccountNotFoundException("There is no Account with id: "+ userId);
+
+		List<TransactionRecipient> receivedTransactions = transactionRecipientRepository.findByUserId(userId);
+
+		List<TransactionResponse> transactionResponses = new ArrayList<>();
+
+		for (TransactionRecipient transactionRecipient : receivedTransactions) {
+
+
+
+		}
+
+
+
+		return null;
+	}
+
+	private String hashPassword(String plainTextPassword){
+		return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+	}
+
+}

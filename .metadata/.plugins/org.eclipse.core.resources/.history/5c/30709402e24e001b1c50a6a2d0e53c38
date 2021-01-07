@@ -1,0 +1,10 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+
+public class RecipientAccount {
+
+	private String email;
+
+	private String userId;
+
+}

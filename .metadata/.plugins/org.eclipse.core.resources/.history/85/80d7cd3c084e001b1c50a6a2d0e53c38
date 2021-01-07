@@ -1,0 +1,10 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.repository;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.Account;
+
+@Repository
+public interface AccountRepository<T> extends CrudRepository<Account, Long>{
+
+}

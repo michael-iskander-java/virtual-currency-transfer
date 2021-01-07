@@ -1,0 +1,22 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.usercontroller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import io.blockchaingroup.vc.virtualcurrencytransfer.dao.UserDaoService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@RestController
+public class UserResource {
+
+	@Autowired
+	private UserDaoService service;
+
+	@GetMapping("/users")
+	public List<User> retrieveAllUsers() {
+		return service.findAll();
+	}
+
+
+
+}

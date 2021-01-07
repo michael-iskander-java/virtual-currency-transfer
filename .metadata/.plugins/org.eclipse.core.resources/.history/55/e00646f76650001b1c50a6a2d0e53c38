@@ -1,0 +1,22 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+import java.util.Date;
+import java.util.List;
+
+public class TransactionResponse {
+
+
+	private double amount;
+
+	private Date transactionDate;
+
+	AccountResponse sender;
+
+	List<AccountResponse> receivers;
+
+
+
+
+
+
+}

@@ -1,0 +1,12 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.Account;
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.TransactionRecipient;
+
+
+public interface TransactionRecipientRepository<T> extends JpaRepository<TransactionRecipient, Long> {
+
+	TransactionRecipient findByUserId(String userId);
+}

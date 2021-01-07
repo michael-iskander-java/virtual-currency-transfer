@@ -1,0 +1,13 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.usercontroller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloWorld {
+
+
+	@GetMapping(path = "/hello-world")
+	public String helloWorld() {
+		return "Hello World";
+	}
+}

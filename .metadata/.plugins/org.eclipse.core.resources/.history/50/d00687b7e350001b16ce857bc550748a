@@ -1,0 +1,15 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+import java.util.Date;
+
+public class SentTransactionItem {
+
+	private String userName;
+	private String userId;
+	private String email;
+	private double amount;
+	private Date transactionDate;
+
+
+
+}

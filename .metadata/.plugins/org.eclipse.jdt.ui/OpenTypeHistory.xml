@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+<typeInfo handle="=virtual-currency-transfer/C:\/Users\/Michael\/.m2\/repository\/org\/springframework\/data\/spring-data-jpa\/2.2.1.RELEASE\/spring-data-jpa-2.2.1.RELEASE.jar=/maven.pomderived=/true=/=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-jpa=/=/maven.version=/2.2.1.RELEASE=/=/maven.scope=/compile=/&lt;org.springframework.data.jpa.repository(JpaRepository.class[JpaRepository" modifiers="1537" timestamp="1609691034843"/>
+<typeInfo handle="=virtual-currency-transfer/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;io.blockchaingroup.vc.virtualcurrencytransfer.model{Transaction.java[Transaction" modifiers="1" timestamp="1609807112621"/>
+<typeInfo handle="=virtual-currency-transfer/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;io.blockchaingroup.vc.virtualcurrencytransfer.model{Account.java[Account" modifiers="1" timestamp="1609920017260"/>
+</typeInfoHistroy>

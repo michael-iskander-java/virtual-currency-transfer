@@ -1,0 +1,13 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+import java.util.List;
+
+public class ReceivedTransaction {
+
+
+	private double amount;
+
+	List<SentTransactionItem> senders;
+
+
+}

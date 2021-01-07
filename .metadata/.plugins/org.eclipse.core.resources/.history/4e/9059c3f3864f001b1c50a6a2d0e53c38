@@ -1,0 +1,48 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+
+public class AccountDO {
+
+	private String userName;
+
+	private String email;
+
+	private String passowrd;
+
+	public AccountDO() {
+		super();
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getPassowrd() {
+		return passowrd;
+	}
+
+
+	public void setPassowrd(String passowrd) {
+		this.passowrd = passowrd;
+	}
+
+
+
+}

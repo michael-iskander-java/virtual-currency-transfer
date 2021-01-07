@@ -1,0 +1,17 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+public class AccountResponse {
+
+
+	private String userName;
+	private String userId;
+	private String email;
+	private double availableBalance;
+
+
+
+}

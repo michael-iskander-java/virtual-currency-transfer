@@ -1,0 +1,45 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+import java.net.URI;
+import java.util.List;
+import javax.validation.Valid;
+import io.blockchaingroup.vc.virtualcurrencytransfer.common.AccountDO;
+import io.blockchaingroup.vc.virtualcurrencytransfer.dao.AccountDaoService;
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.Account;
+import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+@RestController
+public class AccountController {
+
+
+	@Autowired
+	private AccountDaoService accountService;
+
+	@PostMapping("/addaccount")
+	public String createAccount(@Valid@RequestBody AccountDO account) throws Exception {
+
+		Account savedAccount = accountService.addAccount(account);
+
+		return "An account is created with id: "+savedAccount.getUserId();
+
+	}
+
+	@GetMapping("/accounts")
+	public List<Account> retrieveAllAccounts() {
+		return accountService.getAllAccounts();
+	}
+
+	@PostMapping("/sendVc")
+	public String sendVc(@RequestHeader("user-id") String userId) {
+
+		return "";
+	}
+
+}

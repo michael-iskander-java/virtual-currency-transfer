@@ -1,0 +1,11 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+
+public class ReceivedTransaction {
+
+
+	private double amount;
+
+
+
+}

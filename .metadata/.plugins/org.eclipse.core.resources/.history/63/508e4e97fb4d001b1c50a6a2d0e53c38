@@ -1,0 +1,11 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import io.blockchaingroup.vc.virtualcurrencytransfer.model.Account;
+
+
+@Repository
+public interface AccountRepository extends JpaRepository<Account, Long>{
+
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.dao.UserDaoService"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.model.User"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.exception.UserNotFoundException"/>
+<fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
+<fullyQualifiedTypeName name="org.springframework.data.repository.CrudRepository"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.repository.AccountRepository"/>
+<fullyQualifiedTypeName name="org.mindrot.jbcrypt.BCrypt"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.dao.AccountDaoService"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.common.AccountDO"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.model.Account"/>
+<fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+<fullyQualifiedTypeName name="org.hibernate.validator.constraints.Email"/>
+<fullyQualifiedTypeName name="javax.validation.constraints.Size"/>
+<fullyQualifiedTypeName name="javax.validation.constraints.NotEmpty"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonProperty"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonProperty.Access"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestHeader"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.repository.TransactionRepository"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.model.Transaction"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.common.RecipientAccount"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.exception.AccountNotFoundException"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.model.TransactionRecipient"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.repository.TransactionRecipientRepository"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.exception.InsufficientFundException"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.common.AccountResponse"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="io.blockchaingroup.vc.virtualcurrencytransfer.common.TransactionResponse"/>
+</qualifiedTypeNameHistroy>

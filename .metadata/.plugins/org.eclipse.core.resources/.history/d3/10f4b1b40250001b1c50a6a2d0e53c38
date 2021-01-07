@@ -1,0 +1,22 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+
+public class RecipientAccount {
+
+
+
+	private String userId;
+
+	private double transferredAmount;
+
+
+
+	public RecipientAccount() {
+		super();
+	}
+
+
+
+
+
+}

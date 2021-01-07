@@ -1,0 +1,53 @@
+package io.blockchaingroup.vc.virtualcurrencytransfer.common;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+public class AccountDO {
+
+	@Size(min=2, message="Name should have atleast 2 characters")
+	private String userName;
+
+	@Email
+	private String email;
+
+	private String passowrd;
+
+	public AccountDO() {
+		super();
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getPassowrd() {
+		return passowrd;
+	}
+
+
+	public void setPassowrd(String passowrd) {
+		this.passowrd = passowrd;
+	}
+
+
+
+}
