@@ -141,7 +141,7 @@ public class DaoService {
 		transactionRecipientRepository.saveAll(transactionRecipients);
 
 
-		return "A successful transaction of " + totalVcAmount + "VC has been performed by the user " + userId;
+		return "A successful transaction of " + totalVcAmount + "VC has been performed by the user " + userId+".";
 	}
 
 
