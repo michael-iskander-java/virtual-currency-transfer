@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "71495863-5deb-433f-bf81-6f498f1c6bbd",
+		"name": "virtual-currency-transfer_Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/sendVc",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "user-id",
+						"value": "usr-3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"userId\": \"usr-1\",\r\n        \"transferredAmount\": 20\r\n    },\r\n    {\r\n        \"userId\": \"usr-2\",\r\n        \"transferredAmount\": 10\r\n    }\r\n\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sendVc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sendVc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/sentTransactions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "user-id",
+						"value": "usr-2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/sentTransactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sentTransactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/receivedTransactions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "user-id",
+						"value": "usr-2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/receivedTransactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"receivedTransactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/addaccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"userName\": \"Mark\",\r\n        \"email\": \"mark@gmail.com\",\r\n        \"passowrd\": \"66778900\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/addaccount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"addaccount"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
